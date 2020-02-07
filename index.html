@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Psychic Game</title>
+    <!--<link href=-->
+</head> 
+<body>
+    <p>
+        <h1>The Psychic Game</h1>
+    </p>
+    <p id="wins">Wins: 0 </p>
+    <p id="losses">Losses: 0</p>
+    <p id="guessessLeft">Guesses Left: 9</p>
+    <p id="soFar">Your Guesses so Far: </p>
+    
+<script>
+
+// Initialize variables
+
+const fiveWins = "./assets/SFX/PrettyGood.mp3";
+const wow = "./assets/SFX/Wow.mp3";
+const win = "./assets/SFX/Win.mp3";
+const loose = "./assets/SFX/Loose.mp3";
+
+var letters = "";
+for (var i = 0; i < 26; i++) {
+    letters = letters + String.fromCharCode(i+97);
+}
+
+let winsTotal = 0;
+let lossesTotal = 0;
+let remainingGuesses = 9;
+let guessesSoFar = "";
+let myguess = "";
+var compchoice = " ";
+
+// function to update display
+function updateDisplay() {
+document.getElementById("wins").innerHTML ="Wins: " + winsTotal;
+document.getElementById("losses").innerHTML ="Losses: " + lossesTotal;
+document.getElementById("guessessLeft").innerHTML ="guessessLeft: " + remainingGuesses;
+document.getElementById("soFar").innerHTML ="Your Guesses so Far: " + guessesSoFar;
+}
+
+// define function to play sound
+function playIt(sound) {
+  var x = document.createElement("AUDIO");
+    x.setAttribute("src",sound);
+    x.setAttribute("autoplay","true");
+    x.load();
+    x.play();
+    document.body.appendChild(x);
+}
+
+// define function to obtain 1st computer choice
+//function randomletter() {
+//    return String.fromCharCode(Math.floor(Math.random() * 25) + 97);
+//}
+
+// initialize display and obtain computer's first choice
+
+updateDisplay();
+
+// obtain computer choice
+
+compchoice = String.fromCharCode(Math.floor(Math.random() * 25) + 97);
+                                //  var compchoice = "a";
+
+    console.log("----------------------------------------");
+    console.log(" Computer choice: " + compchoice);
+    console.log("----------------------------------------");
+
+    // obtain player's guess
+ document.onkeyup = function(event) {
+    myguess = event.key.toLowerCase();
+        console.log("         -----------------------");
+        console.log("          My choice: " + myguess); 
+        console.log("          Computer choice: " + compchoice);
+ 
+        // update remaing guesses : decrement
+    remainingGuesses--;
+
+    // update guesses so far : concatenate
+    guessesSoFar = guessesSoFar + myguess + ", ";
+
+    // if guesses match increment wins, reset remaining guesses and gusses so far and play win sound
+    // if wins = 5 play pretty good sound
+    // if wins = 10 play wow sound
+
+    if(myguess == compchoice) {
+        //console.log("My guess == compchoice; winsTotal = " + winsTotal);
+        winsTotal++;
+        remainingGuesses = 9;
+        guessesSoFar = " ";
+        compchoice = String.fromCharCode(Math.floor(Math.random() * 25) + 97);
+            console.log("----------------------------------------");
+            console.log(" Computer choice: " + compchoice);
+            console.log("----------------------------------------");
+
+        updateDisplay();
+        playIt(win);
+        if(winsTotal === 5) {
+            playIt(fiveWins)
+            }
+        if(winsTotal === 10) {
+            playIt(wow)
+        }
+    }
+    // if 9 guesses mismatch increment losses and play loss sound
+
+    if(remainingGuesses == 0) {
+        lossesTotal++;
+        remainingGuesses = 9;
+        guessesSoFar = " ";
+        playIt(loose);
+        compchoice = String.fromCharCode(Math.floor(Math.random() * 25) + 97);
+            console.log("----------------------------------------");
+            console.log(" Computer choice: " + compchoice);
+            console.log("----------------------------------------");
+
+    }
+    updateDisplay();
+    }
+
+    // Problems:
+    // 1. need to ignore duplicate and non alphabetic entries
+
+
+</script>
+</body>
+</html>
+
+
+
