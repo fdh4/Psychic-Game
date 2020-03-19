@@ -21,7 +21,7 @@
 const fiveWins = "./assets/SFX/PrettyGood.mp3";
 const wow = "./assets/SFX/Wow.mp3";
 const win = "./assets/SFX/Win.mp3";
-const loose = "./assets/SFX/Loose.mp3";
+const loss = "./assets/SFX/Loose.mp3";
 
 var letters = "";
 for (var i = 0; i < 26; i++) {
@@ -64,9 +64,10 @@ updateDisplay();
 
 compchoice = String.fromCharCode(Math.floor(Math.random() * 25) + 97);
 
-        console.log("----------------------------------------");
-        console.log(" Computer choice: " + compchoice);
-        console.log("----------------------------------------");
+console.log("----------------------------------------");
+console.log(" Computer choice: " + compchoice);
+console.log("----------------------------------------");
+
 
 // obtain player's guess
 
@@ -77,7 +78,7 @@ compchoice = String.fromCharCode(Math.floor(Math.random() * 25) + 97);
             console.log("          My choice: " + myguess); 
             console.log("          Computer choice: " + compchoice);
 
-        // ignore duplicate and non alpha entries
+        // ignore duplicate and non alpha user entries
         // A 65 Z 90 a 97 z 122 
 
             console.log("Duplicate Guess? "+guessesSoFar.indexOf(myguess))
@@ -125,7 +126,7 @@ compchoice = String.fromCharCode(Math.floor(Math.random() * 25) + 97);
                 lossesTotal++;
                 remainingGuesses = 9;
                 guessesSoFar = " ";
-                playIt(loose);
+                playIt(loss);
                 compchoice = String.fromCharCode(Math.floor(Math.random() * 25) + 97);
                     console.log("----------------------------------------");
                     console.log(" Computer choice: " + compchoice);
@@ -137,9 +138,6 @@ compchoice = String.fromCharCode(Math.floor(Math.random() * 25) + 97);
         }
         }
     }
-    // Problems:
-    // 1. need to ignore duplicate and non alphabetic entries
-
 </script>
 </body>
 </html>
